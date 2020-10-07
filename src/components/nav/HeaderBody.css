@@ -1,0 +1,45 @@
+.img-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+}
+.img-body {
+  display: flex;
+  justify-content: center;
+  background-color: #c2bfb5;
+}
+.img-container h1 {
+  font-weight: 100;
+  font-size: 3.3rem;
+}
+.img-container h1 span {
+  font-size: 3.3rem;
+  font-weight: bold;
+}
+.img-container p {
+  margin-top: 1rem;
+}
+.hero-btn {
+  padding: 1rem 2.5rem;
+  color: white;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  outline: none;
+  background: #7c6d3b;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.hero-btn:hover {
+  color: #7c6d3b;
+  background-color: white;
+}
+.hero-btn:focus {
+  color: #7c6d3b;
+  background-color: white;
+}
+
+.hero-content {
+  width: 55%;
+  margin-bottom: 4rem;
+}
