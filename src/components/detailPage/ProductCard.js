@@ -37,6 +37,36 @@ export default function MediaCard(props) {
     await dispatch(cartActions.addCartItem(item, quantity));
     props.alert();
   };
+
+  let newArray = [];
+  let newArray2 = [];
+  console.log(props.item);
+  for (
+    let i = 0;
+    i < Math.floor(props.item.ratings.split(" ")[0].split(".")[0]);
+    i++
+  ) {
+    newArray.push(
+      <li>
+        <StarIcon style={{ width: "1.3rem" }} />
+      </li>
+    );
+  }
+
+  for (
+    let i = 0;
+    i < 5 - Math.floor(props.item.ratings.split(" ")[0].split(".")[0]);
+    i++
+  ) {
+    if (5 - Math.floor(props.item.ratings.split(" ")[0].split(".")[0]) >= 2) {
+      newArray2.push(
+        <li>
+          <StarBorder style={{ width: "1.3rem" }} />
+        </li>
+      );
+    }
+  }
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -82,21 +112,18 @@ export default function MediaCard(props) {
           </Typography>
           <div>
             <ul className="rating-icon">
-              <li>
-                <StarIcon />
-              </li>
-              <li>
-                <StarIcon />
-              </li>
-              <li>
-                <StarIcon />
-              </li>
-              <li>
-                <StarHalf />
-              </li>
-              <li>
-                <StarBorder />
-              </li>
+              {newArray}
+              {Math.floor(props.item.ratings.split(" ")[0].split(".")[1]) !==
+              0 ? (
+                <li>
+                  <StarHalf style={{ width: "1.3rem" }} />
+                </li>
+              ) : (
+                <li>
+                  <StarBorder style={{ width: "1.3rem" }} />
+                </li>
+              )}
+              {newArray2.splice(newArray2.length - 1)}
             </ul>
           </div>
         </CardContent>
