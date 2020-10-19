@@ -1,0 +1,33 @@
+.filter-browse {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+.filter-browse li {
+  margin: 1rem 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.filter-browse span {
+  width: 100%;
+  text-align: left;
+}
+.browser {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: left;
+}
+.filter-heading > span {
+  background: rgb(0, 0, 0);
+  width: 40%;
+  position: absolute;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+}
+.filter-heading {
+  position: relative;
+  padding-bottom: 0.5rem;
+}

@@ -1,0 +1,8 @@
+.rating-icon {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.rating-icon li {
+  color: #949494;
+}
