@@ -12,6 +12,9 @@ import StarBorder from "@material-ui/icons/StarBorder";
 import StarHalf from "@material-ui/icons/StarHalf";
 import "./ProductCard.css";
 import Truncate from "react-truncate";
+import { Link } from "react-router-dom";
+import * as cartActions from "../../store/actions/cart";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -26,26 +29,44 @@ const useStyles = makeStyles({
 });
 
 export default function MediaCard(props) {
-  const classes = useStyles();
+  const dispatch = useDispatch();
 
+  const classes = useStyles();
+  const addItemHandler = async (item, quantity) => {
+    console.log("ok");
+    await dispatch(cartActions.addCartItem(item, quantity));
+    props.alert();
+  };
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <div
-          style={{
-            height: "40vh",
-            display: "flex",
-            justifyContent: "center",
-            overflow: "hidden",
+        <Link
+          to={{
+            pathname: `/${props.previousRoute}/${props.index}`,
+            state: {
+              selected: props.selected,
+              array: props.array,
+              // alertEvent: props.alert,
+            },
           }}
+          onClick={() => window.scrollTo(0, 0)}
         >
-          <CardMedia
-            className={classes.media}
-            image={props.item.ImageUrl}
-            title={props.item.title}
-          />
-        </div>
-        <CardContent style={{ textAlign: "left" }}>
+          <div
+            style={{
+              height: "40vh",
+              display: "flex",
+              justifyContent: "center",
+              overflow: "hidden",
+            }}
+          >
+            <CardMedia
+              className={classes.media}
+              image={props.item.ImageUrl}
+              title={props.item.title}
+            />
+          </div>
+        </Link>
+        <CardContent style={{ textAlign: "left", height: "28vh" }}>
           <Typography gutterBottom variant="body1" component="h4">
             <Truncate lines={3}>{props.item.title}</Truncate>
           </Typography>
@@ -81,12 +102,28 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Buy Now
-        </Button>
-        <Button size="small" color="primary">
+        <Link to="/cart">
+          <Button
+            size="small"
+            color="primary"
+            onClick={addItemHandler.bind(this, props.item, 1)}
+          >
+            Buy Now
+          </Button>
+        </Link>
+        {/* <Link
+          to={{
+            pathname: `/${props.previousRoute}/${props.index}/cart`,
+          }}
+        > */}
+        <Button
+          size="small"
+          color="primary"
+          onClick={addItemHandler.bind(this, props.item, 1)}
+        >
           Add To Cart
         </Button>
+        {/* </Link> */}
       </CardActions>
     </Card>
   );

@@ -15,7 +15,7 @@ export const Categories = [
       "https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
   },
   {
-    name: "Mobile",
+    name: "Smartphones",
     image:
       "https://images.unsplash.com/photo-1480694313141-fce5e697ee25?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
   },

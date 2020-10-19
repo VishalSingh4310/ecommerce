@@ -10,6 +10,7 @@ import Navigator from "./navigation/Navigator";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import productReducer from "./store/reducers/products";
+import cartReducer from "./store/reducers/cart";
 
 const font = "'Open Sans', sans-serif";
 const theme = createMuiTheme({
@@ -27,7 +28,10 @@ const theme = createMuiTheme({
 });
 
 function App() {
-  const rootReducer = combineReducers({ products: productReducer });
+  const rootReducer = combineReducers({
+    products: productReducer,
+    cart: cartReducer,
+  });
   const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(ReduxThunk))

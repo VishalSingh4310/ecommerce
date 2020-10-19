@@ -9,7 +9,7 @@ const initialState = {
     { name: "Laptop", item: Laptop },
     { name: "Accessories", item: MenWatch },
     { name: "Women Wear", item: WomenClothes },
-    { name: "MenWatch", item: Mobile },
+    { name: "Smartphones", item: Mobile },
     { name: "Men Wear", item: MenClothes },
   ],
   category: Categories,

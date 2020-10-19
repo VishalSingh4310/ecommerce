@@ -49,16 +49,10 @@ const Header = () => {
         <div className="inner-strip">
           <ul className="strip-container">
             <Router>
-              {/* <Switch> */}
-              <Route path="/" component={HomePage} exact>
-                {/* <Route path="/:id" component={DetailPage} exact />
-        <Route path="/:id/:name" component={SpecificPage} exact />
-        <Route path="/:id/:name/cart" component={CartPage} exact />
-      </Switch> */}
-                <Link to="/Men Wear">
-                  <li>MEN</li>
-                </Link>
-              </Route>
+              <Link to="/Men Wear">
+                <li>MEN</li>
+              </Link>
+
               <Link to="/Women Wear">
                 <li>WOMEN</li>
               </Link>
@@ -69,7 +63,7 @@ const Header = () => {
                 <li>NEW ARRIVALS</li>
               </Link>
               <Link to="/Mobile">
-                <li>COLLECTIONS</li>
+                <li>SMARTPHONES</li>
               </Link>
             </Router>
           </ul>

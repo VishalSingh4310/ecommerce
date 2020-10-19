@@ -15,9 +15,9 @@ const Navigator = () => {
     <Router>
       <Switch>
         <Route path="/" component={HomePage} exact />
+        <Route path="/cart" component={CartPage} exact />
         <Route path="/:id" component={DetailPage} exact />
         <Route path="/:id/:name" component={SpecificPage} exact />
-        <Route path="/:id/:name/cart" component={CartPage} exact />
       </Switch>
     </Router>
   );
