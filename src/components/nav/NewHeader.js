@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import NotificationsOutlinedIcon from "@material-ui/icons/NotificationsOutlined";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import { useSelector } from "react-redux";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -104,6 +105,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewHeader() {
+  const items = useSelector((state) => state.cart.items);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -235,14 +237,14 @@ export default function NewHeader() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Link to="/cart" className={classes.links}>
-              <StyledBadge badgeContent={4} color="secondary">
+              <StyledBadge badgeContent={items.length} color="secondary">
                 <IconButton className={classes.badgeColor}>
                   <ShoppingCartOutlinedIcon />
                 </IconButton>
               </StyledBadge>
             </Link>
             <StyledBadge
-              badgeContent={4}
+              badgeContent={0}
               color="secondary"
               className={classes.links}
             >
