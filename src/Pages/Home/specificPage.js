@@ -21,6 +21,8 @@ import { orange } from "@material-ui/core/colors";
 import { useDispatch } from "react-redux";
 import * as cartActions from "../../store/actions/cart";
 import MuiAlert from "@material-ui/lab/Alert";
+import SubHeader from "../../components/nav/SubHeader";
+import NewHeader from "../../components/nav/NewHeader";
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +30,7 @@ const useStyles = makeStyles({
     "&:hover": {
       backgroundColor: orange[700],
     },
+    marginRight: "1rem",
   },
 });
 
@@ -78,6 +81,7 @@ const SpecificPage = (props) => {
     await dispatch(
       cartActions.addCartItem(props.location.state.selected, quantity)
     );
+    handleClick();
   };
 
   return (
@@ -87,6 +91,8 @@ const SpecificPage = (props) => {
           Your item is added to cart!
         </Alert>
       </Snackbar>
+      <NewHeader />
+      <SubHeader />
       <Grid
         container
         justify="center"
@@ -139,7 +145,10 @@ const SpecificPage = (props) => {
             justifyContent: "flex-end",
           }}
         >
-          <div style={{ width: "80%", textAlign: "left", paddingTop: "1rem" }}>
+          <div
+            style={{ width: "80%", textAlign: "left", paddingTop: "1rem" }}
+            id="specific-product"
+          >
             <Typography
               variant="h6"
               style={{ fontWeight: 600, marginBottom: "1rem" }}
@@ -148,12 +157,6 @@ const SpecificPage = (props) => {
               {props.location.state.selected.title}
             </Typography>
             <div>Reviews {props.location.state.selected.ratings}</div>
-            <Typography variant="body1" component="h1">
-              Your Price:{" "}
-              <span style={{ fontWeight: 600 }}>
-                ${props.location.state.selected.price}
-              </span>
-            </Typography>
             <Typography variant="body2" component="h1">
               Availability: <span style={{ color: "#dbdbdb" }}>Black Red</span>
             </Typography>
@@ -187,6 +190,13 @@ const SpecificPage = (props) => {
                 <RemoveIcon fontSize="small" />
               </IconButton>
             </div>
+            <Typography variant="body1" component="h1">
+              Your Price:{" "}
+              <span style={{ fontWeight: 600, padding: "1rem 0" }}>
+                ${props.location.state.selected.price}
+              </span>
+            </Typography>
+            <br />
             <Link
               to={{
                 pathname: `/cart`,
@@ -202,9 +212,18 @@ const SpecificPage = (props) => {
                 startIcon={<ShoppingCart />}
                 onClick={addItemHandler}
               >
-                Add To Cart
+                Buy Now
               </Button>
             </Link>
+
+            <Button
+              // className={classes.root}
+              variant="outlined"
+              startIcon={<ShoppingCart />}
+              onClick={addItemHandler}
+            >
+              Add To Cart
+            </Button>
           </div>
         </Grid>
         <Grid

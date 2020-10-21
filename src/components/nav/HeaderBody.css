@@ -43,3 +43,12 @@
   width: 55%;
   margin-bottom: 4rem;
 }
+@media (max-width: 768px) {
+  .hero-img {
+    display: none;
+  }
+  .hero-content {
+    width: 100%;
+    margin-bottom: 4rem;
+  }
+}

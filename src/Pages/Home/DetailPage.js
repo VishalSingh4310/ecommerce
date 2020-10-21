@@ -13,6 +13,8 @@ import "../../components/home/BrowseFilter.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MuiAlert from "@material-ui/lab/Alert";
+import SubHeader from "../../components/nav/SubHeader";
+import NewHeader from "../../components/nav/NewHeader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,13 +73,15 @@ const DetailPage = (props) => {
           Your item is added to cart!
         </Alert>
       </Snackbar>
+      <NewHeader />
+      <SubHeader />
       <Grid
         container
         justify="center"
         direction="row"
         style={{ padding: "2rem 0" }}
       >
-        <Grid item xs={2} zeroMinWidth>
+        <Grid item xs={2} zeroMinWidth id="filter">
           <BrowseFilter />
         </Grid>
 
@@ -88,6 +92,7 @@ const DetailPage = (props) => {
           style={{
             borderLeft: "1px solid #dbdbdb",
           }}
+          id="filter-right"
         >
           <Grid item xs={12} lg={12}>
             <div style={{ width: "100%", textAlign: "left" }}>

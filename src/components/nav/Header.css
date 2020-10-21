@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: space-between;
 }
-@media (max-width: 468px) {
+@media (max-width: 768px) {
   .strip {
     display: none;
     height: 0vh;
@@ -73,7 +73,7 @@
 }
 .strip ul li {
   cursor: pointer;
-  margin-right: 1.5rem;
+  padding: 1rem 0.5rem 1rem 0.5rem;
 }
 .strip-container {
   width: 100%;
@@ -83,4 +83,12 @@
 }
 .inner-strip {
   width: 80%;
+}
+.makeStyles-links-3:hover {
+  color: "red";
+  font-weight: 600;
+}
+.makeStyles-links-3:active {
+  color: "#fff";
+  font-weight: 600;
 }

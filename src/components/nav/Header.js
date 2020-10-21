@@ -1,32 +1,63 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import MenuIcon from "@material-ui/icons/Menu";
-import { IconButton } from "@material-ui/core";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { IconButton, makeStyles, fade, InputBase } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
+import { grey, amber } from "@material-ui/core/colors";
+import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
+
+const useStyles = makeStyles((theme) => ({
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    background: grey[200],
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    // width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "20px",
+      background: "transparent",
+    },
+    marginTop: "0.5rem",
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    color: "#333",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
+
 const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [height, setHeight] = useState(0);
-  const ref = useRef(null);
-  const handleScroll = () => {
-    const offset = window.scrollY;
-    // console.log(offset);
-    if (offset - height >= 0) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  };
-  useEffect(() => {
-    setHeight(ref.current.clientHeight);
-  });
-  window.addEventListener("scroll", handleScroll);
+  const classes = useStyles();
   const menuHandler = () => {
     var element = document.getElementById("myDIV");
     element.classList.toggle("mobile-menu");
   };
   return (
     <div className="container">
-      <div className="sub-container" ref={ref}>
+      <div className="sub-container">
         <div className="header-cont">
           <div className="left-header">
             <img
@@ -36,38 +67,43 @@ const Header = () => {
             />
           </div>
           <div className="right-header">
-            <a href="">Login</a> / <a href="">SignUp</a>
-            <br />
-            <input />
+            <div
+              style={{
+                justifyContent: "flex-end",
+                display: "flex",
+                alignItems: "center",
+                paddingRight: "1rem",
+              }}
+            >
+              <PersonOutlineOutlinedIcon style={{ color: amber[600] }} />
+              <span>
+                <a href="" style={{ color: "#333" }}>
+                  Login
+                </a>{" "}
+                /{" "}
+                <a href="" style={{ color: "#333" }}>
+                  SignUp
+                </a>
+              </span>
+            </div>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon style={{ color: amber[600] }} />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </div>
           </div>
         </div>
         <IconButton onClick={menuHandler} id="menu-icon">
           <MenuIcon />
         </IconButton>
-      </div>
-      <div className={scrolled ? "strip scrolled" : "strip"} id="myDIV">
-        <div className="inner-strip">
-          <ul className="strip-container">
-            <Router>
-              <Link to="/Men Wear">
-                <li>MEN</li>
-              </Link>
-
-              <Link to="/Women Wear">
-                <li>WOMEN</li>
-              </Link>
-              <Link to="/Accessories">
-                <li>ACCESSORIES</li>
-              </Link>
-              <Link to="/Laptop">
-                <li>NEW ARRIVALS</li>
-              </Link>
-              <Link to="/Mobile">
-                <li>SMARTPHONES</li>
-              </Link>
-            </Router>
-          </ul>
-        </div>
       </div>
     </div>
   );

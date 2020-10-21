@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Footer from "./components/nav/Footer";
-import Header from "./components/nav/Header";
+import NewHeader from "./components/nav/NewHeader";
 import { combineReducers, applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -41,7 +41,7 @@ function App() {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <div className="App">
-          <Header />
+          {/* <NewHeader /> */}
           <Navigator />
           <Footer />
         </div>

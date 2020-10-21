@@ -82,6 +82,7 @@ export default function MediaCard(props) {
           onClick={() => window.scrollTo(0, 0)}
         >
           <div
+            className="card-div"
             style={{
               height: "40vh",
               display: "flex",
@@ -96,7 +97,10 @@ export default function MediaCard(props) {
             />
           </div>
         </Link>
-        <CardContent style={{ textAlign: "left", height: "28vh" }}>
+        <CardContent
+          style={{ textAlign: "left", height: "28vh" }}
+          className="card-content"
+        >
           <Typography gutterBottom variant="body1" component="h4">
             <Truncate lines={3}>{props.item.title}</Truncate>
           </Typography>

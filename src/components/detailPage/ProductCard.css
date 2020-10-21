@@ -6,3 +6,11 @@
 .rating-icon li {
   color: #949494;
 }
+@media (max-width: 468px) {
+  .card-div {
+    height: auto !important;
+  }
+  .card-content {
+    height: auto !important;
+  }
+}

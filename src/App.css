@@ -29,3 +29,42 @@ body {
   margin-right: 0.3rem;
   cursor: pointer;
 }
+
+/* cartPage */
+.cart-empty {
+  width: 25%;
+  margin: 2rem 0;
+}
+.cart-empty-parent {
+  height: 70vh;
+}
+.logo-img {
+  width: 40%;
+}
+
+@media (max-width: 768px) {
+  .logo-parent {
+    display: flex;
+  }
+  .logo-img {
+    width: 70%;
+  }
+  .deskCart {
+    display: none;
+  }
+  .strip {
+    padding: 1rem 0 !important;
+  }
+  #filter {
+    display: none;
+  }
+  #filter-right {
+    border-left: 1px solid transparent !important;
+  }
+  #specific-product {
+    width: 100% !important;
+  }
+  .MuiPagination-ul {
+    flex-wrap: nowrap !important;
+  }
+}
