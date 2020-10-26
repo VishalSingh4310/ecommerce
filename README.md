@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ![Ecommer_githubImage](https://user-images.githubusercontent.com/52502909/96771361-2992b200-13ff-11eb-95f3-ce6eb1d62a5a.png)
 
 
+## Important Note
+This project use fireabse for authentication so you have to make `Database` folder in `src` directory having file `db.js`.
+`db.js` file contains your fireabse app config cdn having auth function.
 
 ## Available Scripts
 
