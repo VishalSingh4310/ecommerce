@@ -1,5 +1,8 @@
 import React from "react";
 import "./Footer.css";
+import { FaInstagramSquare } from "react-icons/fa";
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaTwitterSquare } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -29,10 +32,16 @@ const Footer = () => {
             <li>
               <span className="heading">Become an Alliance</span>
             </li>
-            <li className="tags">
-              <span>insta</span>
-              <span>facebook</span>
-              <span>twitter</span>
+            <li className="tags" style={{ margin: "0.5rem 0" }}>
+              <span style={{ fontSize: "1.5rem" }}>
+                <FaInstagramSquare />
+              </span>
+              <span style={{ fontSize: "1.5rem", margin: "0 0.5rem" }}>
+                <FaFacebookSquare />
+              </span>
+              <span style={{ fontSize: "1.5rem" }}>
+                <FaTwitterSquare />
+              </span>
             </li>
             <li>
               <span className="heading">MAILING LIST</span>

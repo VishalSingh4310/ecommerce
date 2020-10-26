@@ -40,7 +40,6 @@ export default function MediaCard(props) {
 
   let newArray = [];
   let newArray2 = [];
-  console.log(props.item);
   for (
     let i = 0;
     i < Math.floor(props.item.ratings.split(" ")[0].split(".")[0]);

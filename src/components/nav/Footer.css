@@ -58,7 +58,7 @@
 .box ul li {
   cursor: pointer;
 }
-.box ul li:hover {
+.box ul li span:hover {
   color: #c2bfb5;
 }
 .form {

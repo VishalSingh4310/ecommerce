@@ -1,0 +1,59 @@
+.auth-parent-1 {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 468px) {
+  .auth-parent-1 {
+    padding: 0rem;
+  }
+  .auth-subContainer {
+    width: 100%;
+  }
+}
+.auth-subContainer {
+  width: 70%;
+}
+.heading-parent {
+  margin: 1rem 0;
+}
+.heading {
+  text-align: center;
+  color: rgb(88, 88, 88);
+}
+.heading-logo {
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.heading-para {
+  color: #a8a8a8;
+  text-align: center;
+  padding-bottom: 1.5rem;
+}
+.username-input {
+  margin: 1rem 0;
+}
+.password-input {
+  margin: 1rem 0;
+}
+.login_btn {
+  margin: 1rem 0;
+}
+.auth-logo {
+  width: 150px;
+  margin: 0.6rem;
+}
+.auth-option {
+  margin: 1rem 0;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 2fr 0.2fr 2fr;
+}
+.auth-option-para {
+  color: #a8a8a8;
+}
+.auth-option-toggle {
+  color: #ef6c00;
+  cursor: pointer;
+}

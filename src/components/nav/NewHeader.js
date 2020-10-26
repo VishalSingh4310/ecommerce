@@ -8,6 +8,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import Avatar from "@material-ui/core/Avatar";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import MoreIcon from "@material-ui/icons/MoreVert";
@@ -16,7 +17,9 @@ import { Link } from "react-router-dom";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import NotificationsOutlinedIcon from "@material-ui/icons/NotificationsOutlined";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as AuthActions from "../../store/actions/auth";
+import { useHistory } from "react-router-dom";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -39,19 +42,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    // display: "none",
-    // [theme.breakpoints.up("sm")]: {
-    //   display: "block",
-    // },
     color: grey[400],
   },
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    // backgroundColor: fade(theme.palette.common.white, 0.15),
-    // "&:hover": {
-    //   backgroundColor: fade(theme.palette.common.white, 0.25),
-    // },
+
     background: grey[300],
     color: grey[800],
     marginRight: theme.spacing(2),
@@ -99,16 +95,53 @@ const useStyles = makeStyles((theme) => ({
   navIcons: {
     color: grey[600],
   },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
   // badgeColor: {
   //   color: amber[200],
   // },
 }));
+const LoginStyledBadge = withStyles((theme) => ({
+  badge: {
+    backgroundColor: "#44b700",
+    color: "#44b700",
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    "&::after": {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      animation: "$ripple 1.2s infinite ease-in-out",
+      border: "1px solid currentColor",
+      content: '""',
+    },
+  },
+  "@keyframes ripple": {
+    "0%": {
+      transform: "scale(.8)",
+      opacity: 1,
+    },
+    "100%": {
+      transform: "scale(2.2)",
+      opacity: 0,
+    },
+  },
+}))(Badge);
 
 export default function NewHeader() {
   const items = useSelector((state) => state.cart.items);
+  const history = useHistory();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const verified = useSelector((state) => state.auth.verified);
+  const token = useSelector((state) => state.auth.token);
+  const UserName = useSelector((state) => state.auth.username);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -134,6 +167,23 @@ export default function NewHeader() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const logoutHandler = async () => {
+    try {
+      await dispatch(AuthActions.logout());
+      handleMenuClose();
+      history.push("/");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  const loginHandler = async () => {
+    try {
+      handleMenuClose();
+      history.push("/auth");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -146,8 +196,14 @@ export default function NewHeader() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {token == null && <MenuItem onClick={loginHandler}>Login</MenuItem>}
+      {token !== null && (
+        <MenuItem onClick={handleMenuClose}>Hello {UserName}</MenuItem>
+      )}
+      {/* {token !== null && (
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      )} */}
+      {token !== null && <MenuItem onClick={logoutHandler}>Logout</MenuItem>}
     </Menu>
   );
 
@@ -162,18 +218,24 @@ export default function NewHeader() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      {token !== null && (
+        <MenuItem>
+          <Link
+            to="/cart"
+            className={classes.links}
+            style={{ display: "flex" }}
+          >
+            <StyledBadge badgeContent={items.length} color="secondary">
+              <IconButton>
+                <ShoppingCartOutlinedIcon />
+              </IconButton>
+            </StyledBadge>
+            <p style={{ color: "#6C6C6C" }}>Cart</p>
+          </Link>
+        </MenuItem>
+      )}
       <MenuItem>
-        <Link to="/cart" className={classes.links}>
-          <StyledBadge badgeContent={4} color="secondary">
-            <IconButton>
-              <ShoppingCartOutlinedIcon />
-            </IconButton>
-          </StyledBadge>
-        </Link>
-        <p>Cart</p>
-      </MenuItem>
-      <MenuItem>
-        <StyledBadge badgeContent={4} color="secondary">
+        <StyledBadge color="secondary">
           <IconButton aria-label="show 11 new notifications" color="inherit">
             <NotificationsOutlinedIcon />
           </IconButton>
@@ -187,7 +249,23 @@ export default function NewHeader() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircleOutlinedIcon />
+          {UserName == null && (
+            <AccountCircleOutlinedIcon className={classes.navIcons} />
+          )}
+          {UserName !== null && (
+            <LoginStyledBadge
+              overlap="circle"
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              variant="dot"
+            >
+              <Avatar className={classes.small} style={{ color: orange }}>
+                {UserName.charAt(0)}
+              </Avatar>
+            </LoginStyledBadge>
+          )}
         </IconButton>
 
         <p>Profile</p>
@@ -209,18 +287,21 @@ export default function NewHeader() {
           >
             <MenuIcon style={{ color: amber[200] }} />
           </IconButton>
-          <Typography
-            className={classes.title}
-            variant="div"
-            noWrap
-            className="logo-parent"
-          >
-            <img
-              src="/Images/new_ecommerLogo.png"
-              alt="logo"
-              className="logo-img"
-            />
-          </Typography>
+          <Link to="/">
+            <Typography
+              className={classes.title}
+              variant="h4"
+              noWrap
+              component="div"
+              className="logo-parent"
+            >
+              <img
+                src="/Images/new_ecommerLogo.png"
+                alt="logo"
+                className="logo-img"
+              />
+            </Typography>
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -260,7 +341,23 @@ export default function NewHeader() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircleOutlinedIcon className={classes.navIcons} />
+              {UserName == null && (
+                <AccountCircleOutlinedIcon className={classes.navIcons} />
+              )}
+              {UserName !== null && (
+                <LoginStyledBadge
+                  overlap="circle"
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                  }}
+                  variant="dot"
+                >
+                  <Avatar className={classes.small} style={{ color: orange }}>
+                    {UserName.charAt(0)}
+                  </Avatar>
+                </LoginStyledBadge>
+              )}
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>

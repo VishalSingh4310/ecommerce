@@ -42,6 +42,11 @@ body {
   width: 40%;
 }
 
+@media (max-width: 600px) {
+  .MuiMenuItem-root {
+    height: 8vh;
+  }
+}
 @media (max-width: 768px) {
   .logo-parent {
     display: flex;

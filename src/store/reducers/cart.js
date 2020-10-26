@@ -1,4 +1,5 @@
 import { ADD_ITEM, DECREMENT, INCREMENT, REMOVE } from "../actions/cart";
+import { LOGOUT } from "../actions/auth";
 
 const initialState = {
   items: [],
@@ -84,6 +85,11 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         items: newArray,
         totalAmount: state.totalAmount - parseInt(action.total),
+      };
+    case LOGOUT:
+      return {
+        items: [],
+        totalAmount: 0,
       };
     default:
       return state;

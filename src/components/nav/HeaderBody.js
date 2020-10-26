@@ -20,8 +20,8 @@ const HeaderBody = () => {
           </button>
         </div>
         <img
-          style={{ objectFit: "cover", height: "80vh" }}
-          src="https://images.unsplash.com/photo-1587305138714-9675ed5c9415?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80"
+          style={{ objectFit: "cover", height: "70vh", margin: "2rem 0" }}
+          src="/Images/newBody1.png"
           alt="main"
           className="hero-img"
         />
